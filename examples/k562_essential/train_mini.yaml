@@ -1,0 +1,14 @@
+# Training parameters for the mini example (small and fast; runs on a CPU in minutes).
+train:
+  K: 10
+  batch_size: 512
+  p_update_every: 1
+  rebalance_every: 30
+  lam_W: 0.001
+  lam_B: 0.001
+  lam_V: 0.001
+  lam_H: 0.001
+  allow_tf32: false
+  seed: 123
+  V_seed: 123
+  H_seed: 1234

@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Environments
+.env
+.venv/
+venv/
+
+# Testing / tools
+.pytest_cache/
+.coverage
+htmlcov/
+.ruff_cache/
+.mypy_cache/
+
+# IDE / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Data and results (never commit; examples are downloaded or generated)
+*.h5ad
+*.h5
+*.pt
+*.npz
+*.parquet
+*.tsv.gz
+*.bed.gz
+outputs/
+results/
+examples/**/data/
+examples/**/output/
+!examples/k562_essential/mini/**
+!examples/k562_essential/reference/**
+
+# Logs
+*.log
+*.out
+*.err
+
+# Internal notes (kept outside the repository)
+internal/
+CLAUDE.md

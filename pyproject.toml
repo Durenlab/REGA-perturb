@@ -1,0 +1,76 @@
+[build-system]
+requires      = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name        = "rega-perturb"
+dynamic     = ["version"]
+description = "A Reference REgulatory Path-Guided Analysis framework for resolving how genetic perturbations act through gene regulatory paths"
+readme      = "README.md"
+requires-python = ">=3.10"
+license     = {text = "MIT"}
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+authors     = [{name = "Lixin Ren", email = "rlxmath017@gmail.com"}]
+keywords    = [
+    "bioinformatics",
+    "gene regulatory networks",
+    "Perturb-seq",
+    "CRISPR screen",
+    "single-cell",
+]
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "pandas>=2.1",
+    "h5py>=3.8",
+    "anndata>=0.10",
+    "click>=8.0",
+    "pyyaml>=6.0",
+    "tqdm>=4.60",
+]
+
+[project.optional-dependencies]
+# PyTorch is not installed automatically: choose the CPU or CUDA build for your system
+# (https://pytorch.org/get-started/locally/). Tested with torch 2.5.
+torch = ["torch>=2.0"]
+plot  = ["matplotlib>=3.7"]
+dev   = ["pytest>=7.0", "pytest-cov>=4.0", "ruff>=0.4"]
+
+[project.scripts]
+rega-perturb = "rega_perturb.cli:main"
+
+[project.urls]
+Homepage   = "https://github.com/Durenlab/REGA-perturb"
+Documentation = "https://github.com/Durenlab/REGA-perturb/blob/main/docs/tutorial.md"
+Repository = "https://github.com/Durenlab/REGA-perturb.git"
+Issues     = "https://github.com/Durenlab/REGA-perturb/issues"
+
+[tool.setuptools.dynamic]
+version = {attr = "rega_perturb._version.__version__"}
+
+[tool.setuptools.packages.find]
+where      = ["src"]
+namespaces = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "consistency: comparison with reference outputs (skipped unless configured)",
+    "slow: long-running tests",
+]
+
+[tool.ruff]
+line-length    = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+# training code is kept as validated; no style-only edits
+"src/rega_perturb/model/train.py" = ["I001", "F841"]
